@@ -41,7 +41,7 @@ export default function TabLayout() {
         options={{
           title: "Wallet",
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="wallet" size={24} color={color} />
+            <FontAwesome name="google-wallet" size={24} color={color} />
           ),
         }}
       />

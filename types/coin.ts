@@ -38,3 +38,22 @@ export interface CoinDetails {
   };
   market_cap_rank?: number;
 }
+
+export interface TrendingCoin {
+  id: string;
+  coin_id: number;
+  name: string;
+  symbol: string;
+  thumb: string;
+  small: string;
+  large: string;
+  price_btc: number;
+  score: number;
+  price_change_24h?: number;
+}
+
+export interface TrendingResponse {
+  coins: Array<{
+    item: TrendingCoin;
+  }>;
+}

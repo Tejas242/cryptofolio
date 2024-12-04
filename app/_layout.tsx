@@ -30,11 +30,11 @@ const projectId = process.env.EXPO_PUBLIC_WALLET_CONNECT_PROJECT_ID!;
 const providerMetadata = {
   name: "CryptoFolio",
   description: "Crypto Portfolio Tracker",
-  url: "https://your-cryptofolio-website.com",
-  icons: ["https://your-cryptofolio-icon.com"],
+  url: "https://cryptofolio-website.com",
+  icons: ["https://cryptofolio-icon.com"],
   redirect: {
     native: "cryptofolio://",
-    universal: "your-cryptofolio-website.com",
+    universal: "cryptofolio-website.com",
   },
 } as const;
 

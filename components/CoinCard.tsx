@@ -132,25 +132,40 @@ export default function CoinCard({ coin, onPress, isLoading }: CoinCardProps) {
       ]}
     >
       <ThemedView style={styles.container}>
-        <Image
-          source={{ uri: coin.image }}
-          style={styles.image}
-          contentFit="cover"
-          transition={200}
-        />
-        <View style={styles.infoContainer}>
-          <ThemedText type="defaultSemiBold">{coin.name}</ThemedText>
-          <ThemedText style={styles.symbol}>
-            {coin.symbol.toUpperCase()}
-          </ThemedText>
+        <View style={styles.leftContainer}>
+          <Image
+            source={{ uri: coin.image }}
+            style={styles.image}
+            contentFit="cover"
+            transition={200}
+          />
+          <View style={styles.infoContainer}>
+            <ThemedText style={styles.name}>{coin.name}</ThemedText>
+            <ThemedText style={styles.symbol}>
+              {coin.symbol.toUpperCase()}
+            </ThemedText>
+          </View>
         </View>
+
         <View style={styles.priceContainer}>
-          <ThemedText type="defaultSemiBold">
+          <ThemedText style={styles.price}>
             ${coin.current_price.toLocaleString()}
           </ThemedText>
-          <ThemedText style={{ color: priceChangeColor }}>
-            {coin.price_change_percentage_24h.toFixed(2)}%
-          </ThemedText>
+          <View
+            style={[
+              styles.changeBadge,
+              { backgroundColor: priceChangeColor + "20" },
+            ]}
+          >
+            <ThemedText
+              style={[styles.changeText, { color: priceChangeColor }]}
+            >
+              {coin.price_change_percentage_24h >= 0 ? "+" : ""}
+              {coin.price_change_percentage_24h.toFixed(
+                2,
+              )}%
+            </ThemedText>
+          </View>
         </View>
       </ThemedView>
     </Pressable>
@@ -158,18 +173,21 @@ export default function CoinCard({ coin, onPress, isLoading }: CoinCardProps) {
 }
 
 const styles = StyleSheet.create({
-  skeletonBase: {
-    borderRadius: 4,
-  },
   pressable: {
-    width: "100%",
+    marginHorizontal: 20,
+    marginVertical: 6,
   },
   container: {
     flexDirection: "row",
     padding: 16,
     alignItems: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.light.border,
+    backgroundColor: "rgba(0,0,0,0.05)",
+    borderRadius: 16,
+    justifyContent: "space-between",
+  },
+  leftContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   image: {
     width: 40,
@@ -177,14 +195,35 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   infoContainer: {
-    flex: 1,
-    marginLeft: 16,
+    marginLeft: 12,
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: "600",
   },
   symbol: {
-    opacity: 0.6,
     fontSize: 14,
+    opacity: 0.6,
+    marginTop: 2,
   },
   priceContainer: {
     alignItems: "flex-end",
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 4,
+  },
+  changeBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  changeText: {
+    fontSize: 12,
+    fontWeight: "500",
+  },
+  skeletonBase: {
+    borderRadius: 4,
   },
 });

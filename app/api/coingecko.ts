@@ -1,5 +1,10 @@
 import axios from "axios";
-import { Coin, CoinDetails } from "@/types/coin";
+import {
+  Coin,
+  CoinDetails,
+  TrendingCoin,
+  TrendingResponse,
+} from "@/types/coin";
 
 const COINGECKO_API = "https://api.coingecko.com/api/v3";
 
@@ -85,6 +90,28 @@ export const coinGeckoApi = {
         console.error("Status:", error.response?.status);
       }
       return null;
+    }
+  },
+  getTrendingCoins: async (): Promise<TrendingCoin[]> => {
+    try {
+      const { data } = await api.get<TrendingResponse>("/search/trending");
+
+      // Transform the response to match our interface
+      return data.coins.map(({ item }) => ({
+        id: item.id,
+        coin_id: item.coin_id,
+        name: item.name,
+        symbol: item.symbol,
+        thumb: item.thumb,
+        small: item.small,
+        large: item.large,
+        price_btc: item.price_btc,
+        score: item.score,
+        price_change_24h: 0, // This data is not provided by the trending endpoint
+      }));
+    } catch (error) {
+      console.error("Error fetching trending coins:", error);
+      return [];
     }
   },
 };
