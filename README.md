@@ -1,4 +1,4 @@
-# CryptoFolio
+# CryptoFolio (Under Development)
 
 A modern cryptocurrency portfolio tracking application built with React Native and Expo, featuring real-time market data, wallet integration, and detailed crypto analytics.
 
